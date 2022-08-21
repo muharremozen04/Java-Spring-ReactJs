@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import Components
 import App from './App';
 import Dashboard from './Dashboard';
+import Detail from './Detail';
 import Error from './Error';
 
 // routes
@@ -14,6 +15,7 @@ const routes =
   <Routes>
     <Route path='/' element={<App />} />
     <Route path='/dashboard' element={<Dashboard />} />
+    <Route path='/detail/:id' element={<Detail />} />
     <Route path='*' element={<Error/>} />
   </Routes>
 </BrowserRouter>

@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import { links } from './Data';
+import { IUser } from './model/IUser';
+
 
 function App() {
 
@@ -12,22 +16,44 @@ function App() {
       if ( email === 'ali@mail.com' && password === '12345' ) {
         // goto dashboard
         // window.location.href = '/dashboard'
-        navigate('/dashboard')
+        const user:IUser = {
+          email: email,
+          password: password
+        }
+        navigate('/dashboard', {state: user})
       }else {
         alert("Kullanıcı adı yada şifre hatalı!")
       }
   }
-
 
   // Name / Surname
   // email
   // password
   // age
 
+  useEffect(() => {
+    console.log("useEffect Call", email);
+  },[])
+  
+  // search
+  const [search, setSearch] = useState('')
+  useEffect(() => {
+    console.log( search );
+  }, [search])
+
+  // navBar Search
+  const [navBarSearch, setNavBarSearch] = useState('')
+  useEffect(() => {
+    if ( navBarSearch.length > 1 ) {
+      console.log("navBarSearch", navBarSearch);
+    }
+  }, [navBarSearch])
+  
+  
+
   return (
     <>
-      <NavLink to='/'>App</NavLink> | <NavLink to='/dashboard'>Dashboard</NavLink>
-
+      <NavBar searchFnc={setNavBarSearch}/>
       <h3>Login Form</h3>
       <form onSubmit={fncLogin} className='col-4'>
         <div className='mb-3'>
@@ -38,6 +64,16 @@ function App() {
         </div>
         <button type='submit' className='btn btn-success'>Send</button>
       </form>
+      <hr></hr>
+      <div className='col-sm-4'>
+        <input onChange={(evt)=> setSearch(evt.target.value) } type='search' className='form-control' placeholder='Search' />
+      </div>
+
+      <hr></hr>
+      { links.map( (item, index) =>
+        <li key={index}> <NavLink to={'/detail/'+item.id}>{item.name}</NavLink> </li>
+      )}
+
     </>
   );
 }
