@@ -49,11 +49,22 @@ function App() {
     }
   }, [navBarSearch])
   
+  const [color, setColor] = useState('#ff00ff')
+  useEffect(() => {
+    const stColor = localStorage.getItem('color')
+    if ( stColor ) {
+      setColor(stColor)
+    }
+  }, [])
+  
+  useEffect(() => {
+    localStorage.setItem('color', color)
+  }, [color])
   
 
   return (
     <>
-      <NavBar searchFnc={setNavBarSearch}/>
+      <NavBar searchFnc={setNavBarSearch} color={color}/>
       <h3>Login Form</h3>
       <form onSubmit={fncLogin} className='col-4'>
         <div className='mb-3'>
@@ -67,6 +78,8 @@ function App() {
       <hr></hr>
       <div className='col-sm-4'>
         <input onChange={(evt)=> setSearch(evt.target.value) } type='search' className='form-control' placeholder='Search' />
+        <input value={color} onChange={(evt)=> setColor(evt.target.value) }  type='color' />
+        <div> { color } </div>
       </div>
 
       <hr></hr>
