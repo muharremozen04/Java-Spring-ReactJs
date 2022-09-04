@@ -1,2 +1,2 @@
 # Java-Spring-ReactJs
-Lessons Learned
+Lecture Notes
