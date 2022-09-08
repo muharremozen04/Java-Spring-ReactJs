@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { IJwt } from './models/IJwt'
 import { userLogin } from './services'
@@ -9,6 +10,8 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
+  const navigate = useNavigate()
+
   const sendFnc = (evt:React.FormEvent) => {
     evt.preventDefault()
     if ( email === '' ) {
@@ -21,6 +24,12 @@ function Login() {
                 const dt = res.data
                 const stData = JSON.stringify(dt)
                 sessionStorage.setItem('user', encrypt(stData))
+                // remember control
+                if ( remember === true ) {
+                    localStorage.setItem('user', encrypt(stData) )
+                }
+                // redirect
+                navigate('/dashboard')
             }else {
                 toast.error("Username or Password Fail!")
             }

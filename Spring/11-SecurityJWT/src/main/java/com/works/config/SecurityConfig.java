@@ -58,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
+
+
     private static final String[] AUTH_WHITELIST = {
             "/auth",
             "/register",

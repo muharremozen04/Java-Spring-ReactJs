@@ -101,6 +101,7 @@ public class UserDetailService implements UserDetailsService {
             String jwt = jwtUtil.generateToken(userDetails);
             hm.put(REnum.status, true);
             hm.put( REnum.jwt, jwt );
+            hm.put(REnum.result, userDetails);
             return new ResponseEntity(hm, HttpStatus.OK);
         }catch (Exception ex) {
             hm.put(REnum.status, false);

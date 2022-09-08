@@ -16,6 +16,11 @@ export const decrypt = ( ciphertext: string ) => {
 
 
 export const control = () : IJwt | null  => {
+    // remember control
+    const stRemember = localStorage.getItem('user')
+    if ( stRemember ) {
+        sessionStorage.setItem('user', stRemember)
+    }
     const stEncData = sessionStorage.getItem('user')
     if ( stEncData ) {
         try {
