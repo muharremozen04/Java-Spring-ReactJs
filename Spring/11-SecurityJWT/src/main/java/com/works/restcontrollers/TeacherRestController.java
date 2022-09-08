@@ -11,6 +11,7 @@ import java.util.Map;
 @RequestMapping("/teacher")
 public class TeacherRestController {
 
+
     @GetMapping("/get")
     public Map get() {
         Map<String, Object> hm = new LinkedHashMap<>();
@@ -18,7 +19,6 @@ public class TeacherRestController {
         hm.put("name", "teacher");
         return hm;
     }
-
 
 
 }

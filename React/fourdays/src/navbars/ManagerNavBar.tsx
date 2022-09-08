@@ -1,4 +1,6 @@
 import React from 'react'
+import UserNameLogOut from '../components/UserNameLogOut'
+import { control } from '../util'
 
 function ManagerNavBar() {
   return (
@@ -16,12 +18,7 @@ function ManagerNavBar() {
             <li className="nav-item">
             <a className="nav-link" href="#">Features</a>
             </li>
-            <li className="nav-item">
-            <a className="nav-link" href="#">Pricing</a>
-            </li>
-            <li className="nav-item">
-            <a className="nav-link disabled">Disabled</a>
-            </li>
+            <UserNameLogOut/>
         </ul>
         </div>
     </div>
