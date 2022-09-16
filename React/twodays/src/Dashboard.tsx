@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import { IPerson } from './model/IPerson'
 import { IUser } from './model/IUser'
@@ -7,6 +7,7 @@ import { personAdd, personDelete, personList } from './Util'
 
 function Dashboard() {
 
+  const navigate = useNavigate()
   const location = useLocation()
   let user:IUser = {email:'', password:''}
   if ( location.state ) {
@@ -17,12 +18,14 @@ function Dashboard() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [tel, setTel] = useState('')
+  const [note, setNote] = useState(0)
   const sendForm = (evt:React.FormEvent) => {
     evt.preventDefault()
     const item:IPerson = {
       name: name,
       email: email,
-      tel: tel
+      tel: tel,
+      note: note
     }
     personAdd(item)
     setName('')
@@ -36,8 +39,11 @@ function Dashboard() {
   }, [])
   
   const fncDelete = (index:number) => {
-    const newItems = personDelete( index )
-    setPersons( newItems )
+    const answer = window.confirm('Are you sure delete item!')
+    if ( answer === true ) {
+      const newItems = personDelete( index )
+      setPersons( newItems )
+    }
   }
 
   return (
@@ -64,6 +70,7 @@ function Dashboard() {
             <table className="table table-hover">
             <thead>
               <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">E-Mail</th>
                 <th scope="col">Telephone</th>
@@ -74,6 +81,7 @@ function Dashboard() {
 
             { persons.map(( item, index ) =>
               <tr key={index}>
+                <td>{ index + 1 }</td>
                 <td>{ item.name }</td>
                 <td>{ item.email }</td>
                 <td>{ item.tel }</td>

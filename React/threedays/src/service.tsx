@@ -1,23 +1,37 @@
-import axios from "axios";
-
-const config = axios.create({
-    baseURL:'https://www.jsonbulut.com/json/',
-    timeout: 15000,
-    params: { "ref": "d1becef32825e5c8b0fc1b096230400b" }
-    //headers:{ "Authorization": "Berer eyJhbGciOiJIUzI1NiJ9" }
-})
+import { config } from "./axiosConfig";
+import { ILogin } from "./models/ILogin";
+import { IProduct } from "./models/IProduct";
+import { IRegister } from "./models/IRegister";
 
 
 // user login
 export const userLogin = ( email:string, password:string ) => {
-
     const sendParams = {
         userEmail: email,
         userPass: password,
         face: "no"
     }
-    return config.get("userLogin.php", { params: sendParams })
-
+    return config.get<ILogin>("userLogin.php", { params: sendParams })
 }
 
+
+// user register
+export const userRegister = ( name:string,surname:string,phone:string,email:string,pass:string ) => {
+    const sendParams = {
+        userName: name,
+        userSurname: surname,
+        userPhone: phone,
+        userMail: email,
+        userPass: pass
+    }
+    return config.get<IRegister>("userRegister.php", { params: sendParams })
+}
+
+// product list
+export const productList = () => {
+    const sendParams = {
+        start: 0
+    }
+    return config.get<IProduct>("product.php", {params:sendParams})
+}
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
 function Detail() {

@@ -20,6 +20,7 @@ function App() {
           email: email,
           password: password
         }
+        sessionStorage.setItem('user', email)
         navigate('/dashboard', {state: user})
       }else {
         alert("Kullanıcı adı yada şifre hatalı!")

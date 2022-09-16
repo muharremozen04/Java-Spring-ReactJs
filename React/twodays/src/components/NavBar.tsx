@@ -1,13 +1,33 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 interface INavBar  {
   searchFnc?: React.Dispatch<React.SetStateAction<string>>,
   color?: string
 }
 
-
 function NavBar( item: INavBar) {
+
+  const [email, setEmail] = useState('')
+  const navigate = useNavigate()
+  useEffect(() => {
+    const stSession = sessionStorage.getItem('user')
+    if ( stSession === null ) {
+        navigate('/')
+    }else {
+      setEmail(stSession)
+    }
+  }, [])
+
+  const logOut = () => {
+    const answer = window.confirm('Are you sure logout!')
+    if ( answer === true ) {
+      //sessionStorage.clear()
+      sessionStorage.removeItem('user')
+      navigate('/')
+    }
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor: item.color}} >
@@ -32,11 +52,11 @@ function NavBar( item: INavBar) {
                 <li><a className="dropdown-item" href="#">Action</a></li>
                 <li><a className="dropdown-item" href="#">Another action</a></li>
                 <li><hr className="dropdown-divider"/></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li><a onClick={logOut} role='button' className="dropdown-item">Logout</a></li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled">Disabled</a>
+              <a className="nav-link disabled"> { email } </a>
             </li>
           </ul>
           <form className="d-flex" role="search">

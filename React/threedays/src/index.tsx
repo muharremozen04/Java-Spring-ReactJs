@@ -3,15 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Detail from './Detail';
+
+const routes = 
+<BrowserRouter>
+  <Routes>
+    <Route path='/' element={<App/>} />
+    <Route path='/detail/:pid' element={<Detail/>} />
+  </Routes>
+</BrowserRouter>
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(
-  <React.Fragment>
-    <App />
-  </React.Fragment>
-);
+root.render(routes);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

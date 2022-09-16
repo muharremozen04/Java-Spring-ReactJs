@@ -28,8 +28,10 @@ function Login() {
                 if ( remember === true ) {
                     localStorage.setItem('user', encrypt(stData) )
                 }
+                
                 // redirect
-                navigate('/dashboard')
+                //navigate('/dashboard')
+                window.location.href = '/dashboard'
             }else {
                 toast.error("Username or Password Fail!")
             }
