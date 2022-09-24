@@ -1,0 +1,20 @@
+export interface ILogin {
+    user: User[];
+}
+
+export interface User {
+    durum:    boolean;
+    mesaj:    string;
+    bilgiler?: Bilgiler;
+}
+
+export interface Bilgiler {
+    result: any;
+    userId:      string;
+    userName:    string;
+    userSurname: string;
+    userEmail:   string;
+    userPhone:   string;
+    face:        string;
+    faceID:      string;
+}
